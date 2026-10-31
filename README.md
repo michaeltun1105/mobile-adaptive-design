@@ -29,10 +29,6 @@ Có thể gõ tên skill (ví dụ `/accessibility-check <link>`) hoặc nhắn 
 - Không cần gửi ảnh chụp nếu đã có link.
 - Nhắn "**chỉ trả lời, chưa làm**" khi chỉ cần tư vấn.
 
-## Cài cho team
-
-- **Upload:** Owner vào Organization settings → Plugins & skills → upload file `.plugin`/`.zip`, chọn *Installed by default*.
-- **Tự cập nhật (khuyên dùng):** đưa thư mục này lên repo **private** GitHub/GitLab, Owner kết nối repo và bật *Sync automatically*. Mỗi pull request có **tăng `version`** trong `.claude-plugin/plugin.json` được merge → cả team nhận bản mới ở session sau.
 
 ## Cách sửa plugin (cho người bảo trì)
 
