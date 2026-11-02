@@ -19,6 +19,8 @@ Also inspect what the file already has (the script lists it): a team colour coll
 
 **Language height** (no question): read the file's text — Vietnamese diacritics, Thai, CJK, Arabic, Hindi → `LANGUAGE_HEIGHT:'medium'` (M3: line height ≈ +7%); Burmese/Telugu → `large`; plain Latin (English…) → `small`. Mixed or unclear → ask in one line. Save it with the system.
 
+**Motion** (Android, no extra question unless the person cares): scheme *Expressive (Recommended)* · *Standard* (utilitarian products); Figma Motion timelines off unless asked. Save as `motion`.
+
 Unattended run: use the recommended options and the brand colour found in the file (most-used primary/brand variable or filled-button colour); say so at the top of the report.
 
 ## 3. Build (only what the platform needs)
@@ -38,7 +40,7 @@ Rules: colours as variables, text as styles, sizes bound to the type-scale colle
 `scripts/apply-theme.js` on the section: kit `Schemes/*` and `M3/sys/*` styles → the theme; optional team-semantic map (table in `references/theming-contrast.md`) to get a full Dark mode. Build copies `M3 Light · …` / `M3 Dark · …` next to the original so the team can compare. Then run the **check-accessibility** skill.
 
 ## 5. Save
-`scripts/save-system.js` with everything decided (platforms, brand, variant, modes, collection names, text-style prefixes, fonts, language height, static colours, icons, overrides). It stores it in the file and draws `_Design system · <Product>` (swatches bound to the variables, decisions, date) on the chosen page.
+`scripts/save-system.js` with everything decided (platforms, brand, variant, modes, collection names, text-style prefixes, fonts, language height, static colours, motion, icons, overrides). It stores it in the file and draws `_Design system · <Product>` (swatches bound to the variables, decisions, date) on the chosen page.
 
 ## Report
 Platform(s), theme source/variant/modes, overrides and their contrast, text styles and modes created, icon decision, where the system frame is, what the other skills will now reuse. Offer to export `Color.kt` / `Theme.kt` (Android) or a colour asset list (iOS) for developers.

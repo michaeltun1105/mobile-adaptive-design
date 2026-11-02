@@ -11,7 +11,7 @@
       "name": "mobile-design",
       "source": "./",
       "description": "Design system setup, Android Compact/Medium/Expanded, iPhone Duo, iOS → Android and accessibility checks for Figma.",
-      "version": "1.3.1"
+      "version": "1.4.0"
     }
   ]
 }

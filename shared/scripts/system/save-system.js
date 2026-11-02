@@ -7,6 +7,7 @@ const PARAMS={
     textStylePrefix:{android:'<Product>/M3', ios:'<Product>/iOS'},
     fonts:{title:'<family>', body:'<family>'},                   // per platform if different: {android:{…}, ios:{…}}
     icons:{android:{source:'material-symbols', weight:400}, ios:{source:'sf-symbols'}},
+    motion:{scheme:'expressive', figmaMotion:false},             // M3 motion scheme for prototypes + handoff; figmaMotion = timeline animations wanted
     overrides:[], iconFrameId:null, notes:'' },
   PAGE_ID:'<page id for the visible frame>', FRAME_X:0, FRAME_Y:0 };
 const sys={...PARAMS.SYSTEM, savedAt:new Date().toISOString()};
@@ -19,7 +20,7 @@ await figma.loadFontAsync({family:'Inter',style:'Regular'}); await figma.loadFon
 const txt=(c,b)=>{ const t=figma.createText(); t.fontName={family:'Inter',style:b?'Bold':'Regular'}; t.characters=c; t.fontSize=b?20:13; f.appendChild(t); return t; };
 txt(name,true); txt('Platforms: '+sys.platforms.join(', ')+' · Brand '+sys.brand+' · '+sys.variant+' · Modes '+sys.modes.join('/'));
 txt('Colours: '+sys.colorCollection+' · Type: '+JSON.stringify(sys.textStylePrefix)+' · Fonts: '+JSON.stringify(sys.fonts));
-txt('Icons: '+JSON.stringify(sys.icons)+(sys.overrides.length?' · Overrides: '+JSON.stringify(sys.overrides):''));
+txt('Motion: '+JSON.stringify(sys.motion||{})+' · Icons: '+JSON.stringify(sys.icons)+(sys.overrides.length?' · Overrides: '+JSON.stringify(sys.overrides):''));
 txt('Saved '+sys.savedAt.slice(0,10)+' — the plugin reads this; edit by re-running setup-system.');
 // swatches bound to the colour collection (first 12 Schemes/* or all brand-ish vars)
 const col=(await figma.variables.getLocalVariableCollectionsAsync()).find(c=>c.name===sys.colorCollection);
