@@ -18,7 +18,12 @@ Có thể gõ lệnh (ví dụ `/mobile-design:check-accessibility <link>`) ho�
 
 ## Cách nhớ tên
 
-**setup** = dựng nền · **build** = làm bản mới · **convert** = chuyển đổi · **check** = kiểm tra. Gõ `/` rồi gõ chữ đầu là ra đúng nhóm.
+**setup** = dựng nền
+**build** = làm bản mới
+**convert** = chuyển đổi
+**check** = kiểm tra.
+
+Gõ `/` rồi gõ chữ đầu là ra đúng nhóm.
 
 ## Cách dùng
 
