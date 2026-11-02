@@ -1,6 +1,6 @@
 ---
-name: "android-adaptive-design"
-description: "This skill should be used when the user shares a Figma screen and asks to adapt it for Android — \"làm bản Android\", \"build tablet/foldable\", \"Compact Medium Expanded\", \"adaptive layout\", \"android adapt\", \"bản 600/905\". Reviews the screen against Material 3 adaptive and M3 Expressive guidance and builds Compact, Medium and Expanded versions with M3 Design Kit components, following the product's saved design system."
+name: build-android
+description: "This skill should be used when the user shares a Figma screen and asks to adapt it for Android — \"làm bản Android\", \"bản tablet\", \"bản gập\", \"foldable\", \"build tablet/foldable\", \"Compact Medium Expanded\", \"adaptive layout\", \"bản 600/905\". Reviews the screen against Material 3 adaptive and M3 Expressive guidance and builds Compact, Medium and Expanded versions with M3 Design Kit components, following the product's saved design system."
 ---
 
 # Android adaptive design: review, then build (phone, foldable, tablet)
@@ -9,7 +9,7 @@ The person pastes a link to a phone design (Android 412 wide, or iPhone 402 × 8
 
 Default breakpoints: **Compact 412 × 915, Medium 600 × 800, Expanded 905 × 680**. Build Compact first (for an iPhone original it is the iOS → Android translation; for an Android original a review-and-fix pass), then Medium and Expanded from it. If the person asks for one breakpoint only ("chỉ mobile", "chỉ tablet"), build just that one.
 
-Reply in the person's language (the team mostly writes Vietnamese), plain words — many readers are not technical. Start with one sentence saying what you are about to do. This is the Android counterpart of `iphone-duo-design`; don't mix the two.
+Reply in the person's language (the team mostly writes Vietnamese), plain words — many readers are not technical. Start with one sentence saying what you are about to do. This is the Android counterpart of `build-iphone-duo`; don't mix the two.
 
 ## Read only what the task needs (saves tokens)
 | File | Read when |
@@ -20,7 +20,7 @@ Reply in the person's language (the team mostly writes Vietnamese), plain words 
 | `references/sources.md` | When a rule is questioned or a case isn't covered — re-read the Google source |
 | `scripts/…` | Reuse instead of rewriting (see *Scripts*) |
 
-Related skills in this plugin: **design-system-setup** (theme, type scale, icons — run it when no system is saved), **ios-to-android** (iPhone → Android phone translation and SF Symbol mapping), **accessibility-check** (contrast, 200% text, touch targets, hard-coded values).
+Related skills in this plugin: **setup-system** (theme, type scale, icons — run it when no system is saved), **convert-ios-to-android** (iPhone → Android phone translation and SF Symbol mapping), **check-accessibility** (contrast, 200% text, touch targets, hard-coded values).
 
 For a small follow-up ("fix spacing", "đổi icon") read only the file that covers it. Keep screenshots small (scale 0.3–0.5) and only of what changed; batch edits into one `use_figma` call per step.
 
@@ -28,20 +28,20 @@ For a small follow-up ("fix spacing", "đổi icon") read only the file that cov
 1. Load `figma-use` before any `use_figma` call and `figma-generate-design` before visible changes; pass both in `skillNames` on every mutating call.
 2. Parse the link (`node-id=A-B` → `A:B`), `create_session` for that fileKey, reuse the session id.
 3. `get_libraries`: the **Material 3 Design Kit** must be added (keys fail with "not found" otherwise) — if missing, ask the person to add it; the review can still run. If an import fails, re-find it with `search_design_system` and report the new key.
-4. **Design system:** run `scripts/load-system.js`. If a system is saved, follow it silently (colour collection and modes, text styles, icon decision, overrides) and say in one line which system you follow; ask only if the request contradicts it. If nothing is saved, run the **design-system-setup** skill first (it asks platform → theme/brand/fonts → icons, builds and saves the system), then continue here.
+4. **Design system:** run `scripts/load-system.js`. If a system is saved, follow it silently (colour collection and modes, text styles, icon decision, overrides) and say in one line which system you follow; ask only if the request contradicts it. If nothing is saved, run the **setup-system** skill first (it asks platform → theme/brand/fonts → icons, builds and saves the system), then continue here.
 5. **Google's sources are the truth, not this skill** (`references/sources.md`). If a source disagrees with the skill, follow the source and say so.
 
 **No hard-coded values.** Every colour bound to a variable, every text on a text style, every icon an instance from the icon frame, spacing on the 8dp scale. Never paste hex, font names or variable/component ids from another product or from examples in this skill — look them up by name in the saved system or ask. Raw values only for guides/labels and third-party logos/photos.
 
 ## Phase 1 — Review (read-only)
-**Gather:** screenshot; a read-only walk (name, type, x/y/w/h, layoutMode, sizing, instance main components, image fills); list navigation, content blocks and every CTA with the block it acts on; for iPhone originals list each iOS-only part and its Android equivalent (skill **ios-to-android**, `references/ios-to-android.md`).
+**Gather:** screenshot; a read-only walk (name, type, x/y/w/h, layoutMode, sizing, instance main components, image fills); list navigation, content blocks and every CTA with the block it acts on; for iPhone originals list each iOS-only part and its Android equivalent (skill **convert-ios-to-android**, `references/ios-to-android.md`).
 
 **Check (measure, don't guess)** — details in `references/layout.md`:
 - Compact: iOS parts mapped; margins 16; fits at 360 without truncation; FAB/toolbar above the navigation bar; gesture inset clear.
 - Stretch risk at 600/905 (buttons, inputs, single cards, lines > 60 characters) → max width, column span or reflow.
 - Canonical fit (list-detail, feed, supporting pane, single column) and why; keep the phone hierarchy.
 - Navigation: bar → rail at Medium single-pane / Expanded; panes per breakpoint; bottom sheet → menu and full-screen dialog → basic dialog at Medium+; reachability (top 25%); CTAs in their content's pane; hinge clear.
-- Edge-to-edge; accessibility (targets ≥ 48, body ≥ 12sp, contrast 4.5:1 / 3:1); **text scaling** risks (skill **accessibility-check**, `references/text-scaling.md`); images (crop, upscale, subject, scrim); icons are Material Symbols if the system says so; auto layout; Expressive fit (Toolbar, Button group, Split button / FAB, Loading indicator; 1–2 hero moments max).
+- Edge-to-edge; accessibility (targets ≥ 48, body ≥ 12sp, contrast 4.5:1 / 3:1); **text scaling** risks (skill **check-accessibility**, `references/text-scaling.md`); images (crop, upscale, subject, scrim); icons are Material Symbols if the system says so; auto layout; Expressive fit (Toolbar, Button group, Split button / FAB, Loading indicator; 1–2 hero moments max).
 
 **Report:** one-line verdict · **Lỗi nghiêm trọng** (numbered, with numbers, fix, source tag) · **Cần chỉnh** · **Đã ổn**. If something blocks the build, ask at most 2 questions (recommended option first) and wait; "làm thử" → take the recommended option and say which.
 
@@ -56,7 +56,7 @@ Keep M3 instances linked; never hand-draw a bar, rail, button or sheet; clone th
 6. **Images:** crop rule per size, scrim under overlaid text, no hard crops (fade the edge), no phone hero filling a landscape screen.
 7. **Expressive pass:** mapped Expressive swaps, emphasized key headline/number, brightest surface for the main pane; list every Expressive change in the report.
 8. **Theme pass** (kit purple still visible, or asked): apply the saved theme (`scripts/apply-theme.js`); never hand-paint kit surfaces when a theme exists.
-9. **Contrast audit** (always after theming or brand overrides): `scripts/contrast-audit.js` (rules in the **accessibility-check** skill); fix by role, report checked / fixed / exempt / needs decision.
+9. **Contrast audit** (always after theming or brand overrides): `scripts/contrast-audit.js` (rules in the **check-accessibility** skill); fix by role, report checked / fixed / exempt / needs decision.
 10. **Fold guide** on two-pane screens: 1-wide red line at the centre, opacity 0.35, locked, `_Guide · Fold (hide before export)`, hidden when done.
 
 ## Verify

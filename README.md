@@ -1,4 +1,4 @@
-# mobile-adaptive-design
+# mobile-design
 
 Bộ công cụ cho Claude làm việc với thiết kế mobile trong Figma: dựng design system, làm bản Android (điện thoại / gập / tablet), bản iPhone Duo, chuyển iOS sang Android và kiểm tra khả năng tiếp cận (accessibility).
 
@@ -8,17 +8,21 @@ Bộ công cụ cho Claude làm việc với thiết kế mobile trong Figma: d�
 
 | Skill | Dùng khi | Ví dụ câu nhắn |
 |---|---|---|
-| `design-system-setup` | Lần đầu làm với một sản phẩm / file, hoặc đổi màu brand, font, icon | "setup system cho file này", "tạo theme từ màu #0096D6" |
-| `android-adaptive-design` | Làm bản Android Compact / Medium / Expanded | "làm bản tablet cho màn này <link>" |
-| `iphone-duo-design` | Làm bản iPhone Duo (màn ngoài / màn trong) | "làm bản Duo cho màn này <link>" |
-| `ios-to-android` | Chỉ chuyển màn iPhone sang Android điện thoại | "chuyển màn iOS này sang Android <link>" |
-| `accessibility-check` | Kiểm tra tương phản, chữ phóng to, vùng chạm, màu/chữ chưa gắn biến | "kiểm tra accessibility <link>" |
+| `setup-system` | Lần đầu làm với một sản phẩm / file, hoặc đổi màu brand, font, icon | "setup system cho file này", "tạo theme từ màu #0096D6" |
+| `build-android` | Làm bản Android Compact / Medium / Expanded | "làm bản tablet cho màn này <link>" |
+| `build-iphone-duo` | Làm bản iPhone Duo (màn ngoài / màn trong) | "làm bản Duo cho màn này <link>" |
+| `convert-ios-to-android` | Chỉ chuyển màn iPhone sang Android điện thoại | "chuyển màn iOS này sang Android <link>" |
+| `check-accessibility` | Kiểm tra tương phản, chữ phóng to, vùng chạm, màu/chữ chưa gắn biến | "kiểm tra accessibility <link>" |
 
-Có thể gõ tên skill (ví dụ `/accessibility-check <link>`) hoặc nhắn bình thường — Claude tự chọn skill.
+Có thể gõ lệnh (ví dụ `/mobile-design:check-accessibility <link>`) hoặc nhắn bình thường — Claude tự chọn skill.
+
+## Cách nhớ tên
+
+**setup** = dựng nền · **build** = làm bản mới · **convert** = chuyển đổi · **check** = kiểm tra. Gõ `/` rồi gõ chữ đầu là ra đúng nhóm.
 
 ## Cách dùng
 
-1. **Lần đầu cho mỗi sản phẩm:** `design-system-setup` hỏi 3 câu — **platform** → **theme** (màu brand, font tiêu đề / nội dung) → **icon**. Claude dựng màu Light/Dark, thang chữ (có chế độ chữ to), bộ icon, rồi **lưu vào file Figma** (kèm frame `_Design system · <Sản phẩm>` để team xem).
+1. **Lần đầu cho mỗi sản phẩm:** `setup-system` hỏi 3 câu — **platform** → **theme** (màu brand, font tiêu đề / nội dung) → **icon**. Claude dựng màu Light/Dark, thang chữ (có chế độ chữ to), bộ icon, rồi **lưu vào file Figma** (kèm frame `_Design system · <Sản phẩm>` để team xem).
 2. **Các lần sau:** mọi skill tự đọc system đã lưu, **không hỏi lại**. Muốn đổi thì nhắn "đổi màu brand…", "đổi font…".
 3. Mỗi lần build xong, Claude tự chạy kiểm tra tương phản và chữ to.
 

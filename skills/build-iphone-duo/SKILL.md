@@ -1,6 +1,6 @@
 ---
-name: "iphone-duo-design"
-description: "Reviews a regular iPhone Figma design against Apple's iPhone Duo guidelines and Apple's Xcode skills, builds outer/inner Duo versions from Apple's iOS 27 templates mapped to the team's design system, and optionally (only with permission) has an independent critic sub-agent score them."
+name: build-iphone-duo
+description: "This skill should be used when the user shares an iPhone Figma screen and asks for the iPhone Duo (foldable iPhone) version — \"làm bản Duo\", \"iPhone gập\", \"iPhone Duo\", \"màn ngoài màn trong\", \"ready for Duo\". Reviews the design against Apple's iPhone Duo guidelines, builds outer/inner Duo versions from Apple's iOS 27 templates mapped to the team's design system, and optionally (only with permission) has an independent critic sub-agent score them."
 ---
 
 # iPhone Duo design: review, then build
@@ -10,7 +10,7 @@ The person pastes a link to a normal iPhone design (usually 402 × 874). Work in
 Reply in the language the person writes in (the team mostly writes Vietnamese). Keep wording plain; many readers are not technical. Start with one sentence saying what you are about to do.
 
 ## Setup (every run)
-0. **Design system (plugin):** run `scripts/load-system.js` first. If a system is saved for iOS, follow its colour collection, text styles (`<Product>/iOS/…`) and icon decision without asking; if none is saved and the build needs one, run the **design-system-setup** skill (platform iOS). After building, verify with `scripts/contrast-audit.js` and `scripts/text-scale-check.js` (Dynamic Type xxxLarge/AX5) — rules in the **accessibility-check** skill. No hard-coded values: colours as variables, texts on styles, icons as instances.
+0. **Design system (plugin):** run `scripts/load-system.js` first. If a system is saved for iOS, follow its colour collection, text styles (`<Product>/iOS/…`) and icon decision without asking; if none is saved and the build needs one, run the **setup-system** skill (platform iOS). After building, verify with `scripts/contrast-audit.js` and `scripts/text-scale-check.js` (Dynamic Type xxxLarge/AX5) — rules in the **check-accessibility** skill. No hard-coded values: colours as variables, texts on styles, icons as instances.
 
 1. Load the Figma skills the Figma MCP server requires: `figma-use` before any `use_figma` call, and `figma-generate-design` before visible changes. Pass both names in `skillNames` on every mutating `use_figma` call.
 2. Parse the link: `figma.com/design/<fileKey>/...?node-id=A-B` → nodeId `A:B`. Call `create_session` for that fileKey and reuse the session id.

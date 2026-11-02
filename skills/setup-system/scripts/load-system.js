@@ -1,4 +1,4 @@
-// use_figma (read-only). Returns the design system saved by design-system-setup, or null.
+// use_figma (read-only). Returns the design system saved by setup-system, or null.
 // Also lists what exists in the file so a missing system can be rebuilt from it.
 const raw=figma.root.getSharedPluginData('mobile_adaptive','system')||figma.root.getSharedPluginData('android_adaptive','system');
 const system=raw?JSON.parse(raw):null;

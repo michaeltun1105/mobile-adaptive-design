@@ -20,7 +20,7 @@ const txt=(c,b)=>{ const t=figma.createText(); t.fontName={family:'Inter',style:
 txt(name,true); txt('Platforms: '+sys.platforms.join(', ')+' · Brand '+sys.brand+' · '+sys.variant+' · Modes '+sys.modes.join('/'));
 txt('Colours: '+sys.colorCollection+' · Type: '+JSON.stringify(sys.textStylePrefix)+' · Fonts: '+JSON.stringify(sys.fonts));
 txt('Icons: '+JSON.stringify(sys.icons)+(sys.overrides.length?' · Overrides: '+JSON.stringify(sys.overrides):''));
-txt('Saved '+sys.savedAt.slice(0,10)+' — the plugin reads this; edit by re-running design-system-setup.');
+txt('Saved '+sys.savedAt.slice(0,10)+' — the plugin reads this; edit by re-running setup-system.');
 // swatches bound to the colour collection (first 12 Schemes/* or all brand-ish vars)
 const col=(await figma.variables.getLocalVariableCollectionsAsync()).find(c=>c.name===sys.colorCollection);
 if(col){ const row=figma.createFrame(); row.name='Swatches'; row.layoutMode='HORIZONTAL'; row.layoutWrap='WRAP'; row.itemSpacing=8; row.counterAxisSpacing=8; row.fills=[]; row.resize(720,10); row.primaryAxisSizingMode='FIXED'; row.counterAxisSizingMode='AUTO'; f.appendChild(row);

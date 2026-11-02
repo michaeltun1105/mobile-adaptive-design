@@ -1,6 +1,6 @@
 ---
-name: design-system-setup
-description: "This skill should be used the first time a product or Figma file is worked on with this plugin, or when the user asks to \"setup system\", \"tạo theme\", \"dựng design system\", \"đổi màu brand\", \"đổi font\", \"theme hoá\", \"tạo bản dark mode\". Asks platform, theme (brand colour + fonts) and icon set, builds the colour theme (Light/Dark), type scale with text-scaling modes and icon decision in Figma, and saves the decisions so every later session reuses them without asking."
+name: setup-system
+description: "This skill should be used the first time a product or Figma file is worked on with this plugin, or when the user asks to \"setup system\", \"tạo theme\", \"dựng design system\", \"đổi màu brand\", \"đổi font\", \"theme hoá\", \"tạo bản dark mode\", \"thang chữ\". Asks platform, theme (brand colour + fonts) and icon set, builds the colour theme (Light/Dark), type scale with text-scaling modes and icon decision in Figma, and saves the decisions so every later session reuses them without asking."
 ---
 
 # Design system setup (ask once, then reuse)
@@ -31,7 +31,7 @@ Both platforms: one brand source, separate type and icons.
 Rules: colours as variables, text as styles, sizes bound to the type-scale collection — **no hard-coded values**; never copy hex, fonts or ids from another product or from examples in the references. Brand override on buttons (exact brand hex) only if the person asks; then check the tone and offer the closest passing colour (`references/theming-contrast.md`). Generate Light/Dark only; contrast modes only on request.
 
 ## 4. Theme existing screens (when asked, or when kit purple is visible)
-`scripts/apply-theme.js` on the section: kit `Schemes/*` and `M3/sys/*` styles → the theme; optional team-semantic map (table in `references/theming-contrast.md`) to get a full Dark mode. Build copies `M3 Light · …` / `M3 Dark · …` next to the original so the team can compare. Then run the **accessibility-check** skill.
+`scripts/apply-theme.js` on the section: kit `Schemes/*` and `M3/sys/*` styles → the theme; optional team-semantic map (table in `references/theming-contrast.md`) to get a full Dark mode. Build copies `M3 Light · …` / `M3 Dark · …` next to the original so the team can compare. Then run the **check-accessibility** skill.
 
 ## 5. Save
 `scripts/save-system.js` with everything decided (platforms, brand, variant, modes, collection names, text-style prefixes, fonts, icons, overrides). It stores it in the file and draws `_Design system · <Product>` (swatches bound to the variables, decisions, date) on the chosen page.
