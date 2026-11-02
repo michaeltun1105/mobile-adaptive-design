@@ -18,10 +18,10 @@ Có thể gõ lệnh (ví dụ `/mobile-design:check-accessibility <link>`) ho�
 
 ## Cách nhớ tên
 
-**setup** = dựng nền
-**build** = làm bản mới
-**convert** = chuyển đổi
-**check** = kiểm tra.
+1. **setup** = dựng nền
+2. **build** = làm bản mới
+3. **convert** = chuyển đổi
+4. **check** = kiểm tra.
 
 Gõ `/` rồi gõ chữ đầu là ra đúng nhóm.
 
@@ -36,14 +36,10 @@ Gõ `/` rồi gõ chữ đầu là ra đúng nhóm.
 - Mỗi file / tính năng một **session mới**.
 - Gửi link đúng **màn hoặc section**, không gửi cả page.
 - Không cần gửi ảnh chụp nếu đã có link.
-- Nhắn "**chỉ trả lời, chưa làm**" khi chỉ cần tư vấn.
+- Nhắn "**chỉ trả lời, chưa cần làm gì**" khi chỉ cần tư vấn.
 
 
-## Cách sửa plugin (cho người bảo trì)
 
-1. Script dùng chung chỉ sửa trong `shared/scripts/` (không sửa bản chép trong `skills/*/scripts/`).
-2. Chạy `tools/sync-shared.sh` để chép sang các skill.
-3. Tăng `version` trong `.claude-plugin/plugin.json` (ví dụ 1.0.0 → 1.0.1 khi sửa nhỏ, 1.1.0 khi thêm tính năng).
 4. Mở pull request → merge.
 
 Cấu trúc: mỗi skill có `SKILL.md` (quy trình ngắn), `references/` (đọc khi cần), `scripts/` (đoạn code Figma dùng lại, chỉ điền PARAMS). Không có giá trị riêng của sản phẩm nào trong plugin — màu, font, icon luôn lấy từ system đã lưu trong từng file.
