@@ -103,7 +103,7 @@ Start every product view from one of the three examples (all exist in the M3 Des
 - Ergonomic regions on Medium landscape/unfolded: top 25% hard to reach; middle comfortable; very bottom edge awkward for large hands.
 
 ### Navigation
-- Primary: **navigation bar** (3–5 destinations, same level) or modal **navigation drawer** (more than 5, less ideal — top reach on compact). Secondary: tabs, bottom app bar. [NAV]
+- Primary: **navigation bar** (3–5 destinations, same level) or, for more than 5, a **modal expanded navigation rail** opened from a menu icon (the navigation drawer is no longer recommended). Secondary: tabs, docked/floating toolbar (bottom app bar no longer recommended). [NAV, CMP]
 - Navigation bar → **navigation rail** on large screens. **Don't use the bottom navigation bar on large screens.** Medium (incl. landscape) may use the rail or a horizontal navigation bar. [NAV, POS]
 - Measured: rail **80** wide; drawer **256** wide around 1440; content max **1080** at 1440 (NIA body at x 308). [LAB, NIA]
 - Actions: highest-importance → FAB (one); secondary → top bar or inline near related content; rare → overflow menu. [NAV]
@@ -136,7 +136,7 @@ Start every product view from one of the three examples (all exist in the M3 Des
 - **Naming:** "window size classes" are now **breakpoints** (Compact < 600, Medium 600–839, Expanded 840–1199, Large 1200–1599, Extra-large ≥ 1600; height breakpoints exist on Android but are rarely needed). Design for breakpoints, not devices; rotating or unfolding changes the breakpoint. [BP]
 - **Scaffold = bars + rails + panes**, next to **safety regions** (system UI; no primary content there). [SCF]
   - **Bars** frame the screen: app bar on top (title + 1–2 essential actions), navigation bar at the bottom (3–5 views, compact/medium only). Bars can span one pane or the full window.
-  - **Rails** fill the perimeter around panes or float above them: on compact the top/bottom rail region holds toolbars, chat inputs, FABs (a toolbar floats above the navigation bar); on larger screens the **leading rail** holds the navigation rail and the **trailing rail** can hold a vertical toolbar or supporting controls. In XR rails become orbiters.
+  - **Rails** fill the perimeter around panes or float above them: on compact the top/bottom rail region holds toolbars, chat inputs, FABs (the Scaffold page shows a toolbar above a navigation bar, but the Toolbars page forbids showing both together — follow the component rule: toolbar on child screens only); on larger screens the **leading rail** holds the navigation rail and the **trailing rail** can hold a vertical toolbar or supporting controls. In XR rails become orbiters.
   - **Panes** hold content; 1–3 visible. **Fixed** (width doesn't change) or **flexible** (grows/shrinks); every layout needs ≥ 1 flexible pane. Permanent or temporary (dismissible).
 - **Recommended panes:** Compact 1 · Medium **1** (2 allowed) · Expanded **2** (1 for dense content / video) · Large 2 · Extra-large 2 (1 or 3; third = standard side sheet, max 400 wide; never more than 3). [SCF, BP]
 - **Two-pane types:** [SCF, BP]
@@ -165,10 +165,10 @@ Start every product view from one of the three examples (all exist in the M3 Des
 
 ### Compact (Android phone) specifics [BP, SCF, NAV, TR, E2E]
 - Frame **412 × 915** (Pixel-class phone; test layouts at 360 wide). One pane, margins **16**, content in a single column.
-- **Bars:** status bar (52) on top, top **App bar** (Small; title left-aligned; up arrow on child screens; 1–2 actions + overflow), bottom **Navigation bar** (3–5 destinations, Vertical items, 80 high) above the gesture bar (24). The navigation bar shows only on top-level destinations; child screens hide it and use the up arrow.
-- **Rail region on compact:** a floating **Toolbar**, chat input or **FAB** sits just above the navigation bar (or above the gesture bar on child screens), 16 from the edges; keep it out of the gesture inset.
+- **Bars:** status bar (52) on top, top **App bar** (Small, or Medium/Large *flexible* for long titles; title leading or centred; up arrow on child screens; max 2 actions, more → toolbar), bottom **flexible Navigation bar** (3–5 destinations, vertical items, labels required; shorter than the old 80dp bar — use the kit's flexible variant) above the gesture bar (24). The navigation bar shows only on top-level destinations; child screens hide it and use the up arrow.
+- **Rail region on compact:** a **FAB** (or chat input) sits just above the navigation bar, 16 from the edges. A **floating toolbar** belongs on child screens (no navigation bar there) — M3 Toolbars: never show a toolbar and a navigation bar at the same time. Keep both out of the gesture inset. [CMP]
 - **Communication:** full-screen dialog for complex tasks (forms such as Edit drive: close icon at leading edge, title, Save text button trailing) or basic dialog for short confirmations; **supplemental selection → bottom sheet** (modal, drag handle, top corners 28) — e.g. Filter & sort, Select month, context actions.
-- **Navigation drawer** only when there are more than 5 destinations (modal). Tabs sit under the app bar.
+- More than 5 destinations → **modal expanded navigation rail** from a menu icon (not a drawer). Tabs sit under the app bar (≤ 4 fixed tabs; more → scrollable).
 - Reachability: primary actions in the bottom half (FAB, toolbar, bottom sheet buttons); nothing tappable under the gesture inset; targets ≥ 48.
 - Edge-to-edge: content scrolls under a translucent status bar and under the transparent gesture bar; the navigation bar background extends under the gesture bar.
 
@@ -183,6 +183,6 @@ Compact, Medium and Expanded are built by default; Large / Extra-large only when
 | Form / settings / one-task step | Full-screen dialog (close, title, Save) or a child screen; inputs full width | One column, max ~6 cols, CTA with the form (settings may use 2 panes 50/50) | Context left, form right with its CTA; or one centred column | Settings list-detail (fixed 412 list); forms in a max-width column, never stretched |
 | Onboarding / paywall / hero | Art top, text + full-width CTA at the bottom | Art top, text + CTA below, CTA max width | Art left half, text + CTA right half, centred vertically; nothing interactive on the hinge | Same as Expanded with max widths; art may take more than half |
 | Filters / options sheet | Modal bottom sheet (drag handle; Save/Cancel at the bottom) | Menu for short option lists; side sheet or full-screen with 2 columns for long filters | Side sheet (fixed 360) or filters inside the pane | Standard side sheet (≤ 400) or filters in the pane |
-| Dialog / alert | Basic dialog (280–312 wide) + Scrim | Basic dialog centred + Scrim (full-screen dialog only on compact) | Basic dialog centred + Scrim | Basic dialog centred + Scrim |
+| Dialog / alert | Basic dialog (280–560 wide) + Scrim | Basic dialog centred + Scrim (full-screen dialog only on compact) | Basic dialog centred + Scrim | Basic dialog centred + Scrim |
 | Supplemental selection (pickers, small choices) | Bottom sheet (or menu for 2–5 short items anchored to the trigger) | **Menu** (bottom sheet only on compact) | Menu | Menu |
 | Media / video | Full width 16:9; immersive in landscape | Letterbox in a container; don't add scrolling that portrait didn't have | Same; tabletop variant only if asked (video top, large controls bottom) | Single pane for video; optional supporting pane (up next) |

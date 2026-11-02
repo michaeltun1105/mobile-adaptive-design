@@ -10,9 +10,9 @@ Keys below are the **published** library keys (verified 2026-10-27 by importing 
 | Rail item (inside rail) | Building Blocks/Navigation rail/Vertical nav item — `Label text#70754:66`, `Icon#70754:196`, `Icon (selected)#58027:75` (INSTANCE_SWAP, pass an icon component id), `Selected` True/False, `Badge`, `Show label` | set | `88820502a684b8895e6f84420e5eeba1dd85b76e` |
 | Expanded rail | Navigation Rail: Expanded | set | `e07e5a0ea6438bb3d099d8e41fd121730687072b` |
 | Bottom nav (compact) | Navigation Bar: Vertical items / Horizontal items (medium) | set | `d044e5ea85ee8d7479269dc54c5cb55b7156821d` / `ea7ecee6955d7956473fde7169a29bde4656ed57` |
-| Drawer (≥ ~1440) | Navigation Drawer | component | `2e423d599a52f1d1c61335f521227c0db6f184af` |
-| Top bar | App bar — `Configuration` Small-centered/Small-image/Search/Small/Medium/Large, `Elevation` Flat/On-scroll; booleans `Show 1st/2nd/3rd trailing action#70463:0/:9/:18`; nested `Leading icon` and `Trailing action 1` (`Icon#58665:2327`); nested `Text content` (`Headline#264:22`, `Show-supporting-text#264:132`) | set | `23a20484e255cb14cf467ccc984ac918e457cefb` |
-| Bottom app bar | Bottom app bar | set | `8f066e8acd27ddaa1271f29e267575d4c30a3d43` |
+| Drawer — **no longer recommended (M3 Expressive)**, use the Expanded rail; only to match an existing product | Navigation Drawer | component | `2e423d599a52f1d1c61335f521227c0db6f184af` |
+| Top bar (Medium/Large = baseline, no longer recommended — prefer the kit's Medium/Large **flexible** app bar if the library has it; see `m3-components.md`) | App bar — `Configuration` Small-centered/Small-image/Search/Small/Medium/Large, `Elevation` Flat/On-scroll; booleans `Show 1st/2nd/3rd trailing action#70463:0/:9/:18`; nested `Leading icon` and `Trailing action 1` (`Icon#58665:2327`); nested `Text content` (`Headline#264:22`, `Show-supporting-text#264:132`) | set | `23a20484e255cb14cf467ccc984ac918e457cefb` |
+| Bottom app bar — **no longer recommended**, use the docked Toolbar | Bottom app bar | set | `8f066e8acd27ddaa1271f29e267575d4c30a3d43` |
 | Side sheet | Side Sheet (Type Standard/Modal) | set | `bd138156169905a581542d50703359e0c1450a43` |
 | Bottom sheet | Bottom sheet | set | `a3ecc23623bce0c4cf795c2c2efb64323cdbce44` |
 | Dialog | Basic dialog | set | `8171ce19b4b8b7a873e91c719b7fb0fdc8a23794` |
