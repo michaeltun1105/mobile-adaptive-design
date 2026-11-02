@@ -39,6 +39,7 @@ Other sources:
 | RTL | M3 — Bidirectionality & RTL | https://m3.material.io/foundations/layout/bidirectionality-rtl |
 | ST | M3 — Styles: Color (system, roles, choosing a scheme, static, dynamic, advanced, resources), Elevation, Icons, Motion (physics, easing & duration, transitions), Shape, Spacing, Typography — summarised in `m3-styles.md` | https://m3.material.io/styles |
 | CMP | M3 — Components: all 38 pages (overview, specs, guidelines, accessibility tabs) — summarised in `m3-components.md` | https://m3.material.io/components |
+| DT | M3 — Design tokens (overview, how to use tokens) | https://m3.material.io/foundations/design-tokens |
 | MS | Material Symbols (Google Fonts) — the only icon source; SVGs via npm `@material-symbols/svg-<weight>` (svg-400 = M3 default) | https://fonts.google.com/icons |
 | MTB | Material Theme Builder (web app is Flutter/canvas — WebFetch returns only metadata; read the GitHub README instead). Figma plugin "Material Theme Builder" creates M3 tokens and Swaps kit components; Color Match keeps input colours for Container roles; JSON import/export | https://material-foundation.github.io/material-theme-builder/ · https://github.com/material-foundation/material-theme-builder |
 | MCU | `@material/material-color-utilities` (npm, the algorithm inside MTB) — `SchemeTonalSpot` (MTB default), `SchemeFidelity` (≈ Color Match), `MaterialDynamicColors.<role>.getArgb(scheme)`, contrast level 0 / 0.5 / 1, `Hct`, `Contrast.ratioOfTones` | https://www.npmjs.com/package/@material/material-color-utilities |
@@ -47,6 +48,7 @@ Other sources:
 
 **Precedence:** where an M3 component page and a layout page disagree (e.g. toolbar above a navigation bar), follow the component page. The M3 layout pages updated in May 2026 (IO26, BP, SCF, GS, SP, CE) are the newest source. Where they disagree with older Android guides, the kit's `Examples/Layout grid`, LAB or NIA (e.g. Medium margin 32, rail 80, fixed widths), follow the M3 pages.
 
+Read 2026-11-02: M3 Design tokens (2 tabs) → `m3-styles.md` § Design tokens; corner values checked against androidx `ShapeTokens.kt`, spring values against `ExpressiveMotionTokens.kt` / `StandardMotionTokens.kt`.
 Read 2026-11-02: **every M3 component page** (38 pages, ~150 tabs) → `m3-components.md`. Measurements shown only in images were not captured — use kit instances.
 Read 2026-11-02: **every page and tab of M3 Styles** (16 pages, 38 tabs) → `m3-styles.md`.
 Read 2026-11-02: **every tab of M3 Foundations → Layout** (Layout overview 3 tabs, Scaffold 4, Grids & spacing 4, Breakpoints 5, Bidirectionality & RTL, Canonical examples 4 — 23 pages) via the `_dsm` JSON. Column counts per breakpoint are only in images (4 / 8 / 12, matching the kit).

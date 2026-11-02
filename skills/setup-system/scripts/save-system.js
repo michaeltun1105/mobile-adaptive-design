@@ -3,7 +3,7 @@
 const PARAMS={
   SYSTEM:{ product:'<Product>', platforms:['android'],            // 'ios' | 'android' | both
     brand:'<#hex>', variant:'Tonal Spot', modes:['Light','Dark'],
-    colorCollection:'<collection name>', typeCollection:'<Product> · Type scale',
+    colorCollection:'<collection name>', typeCollection:'<Product> · Type scale', scaleCollection:'<Product> · Spacing & shape',
     textStylePrefix:{android:'<Product>/M3', ios:'<Product>/iOS'},
     fonts:{title:'<family>', body:'<family>'},                   // per platform if different: {android:{…}, ios:{…}}
     icons:{android:{source:'material-symbols', weight:400}, ios:{source:'sf-symbols'}},

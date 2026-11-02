@@ -71,6 +71,7 @@ Where the Section is (original untouched) · per screen: layout and why, navigat
 | Script | Does |
 |---|---|
 | `scripts/load-system.js` | Reads the saved design system (and lists collections / text-style prefixes) |
+| `scripts/apply-scales.js` | Bind padding, gaps and corner radii of new frames to the saved spacing & shape collection (`BIND_ROOT_IDS`); creates the collection if the system has none yet |
 | `scripts/apply-prototype.js` | After building: prototype links between the new screens with M3 transition patterns + spring from the saved motion scheme, and `Motion:` annotations for handoff (Figma Motion timelines only if asked) |
 | `scripts/helpers.js` | `loadFonts`, `widen`, `copyModes`, `mirrorCheck` |
 | `scripts/android-helpers.js` | `addSystemBars` (Android status + gesture bar), `createIconComponent` (Material Symbol from a checked 24-dp path) |
