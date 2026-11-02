@@ -22,7 +22,7 @@ Reply in the language the person writes in (the team mostly writes Vietnamese). 
    - **Spacing/radius:** bind padding, gap and corner radius to team variables when they exist; otherwise reuse the original's values and say so.
    - **Components:** reuse the team's components (clone or instance) for content; Apple components only for system parts (status bar, bars, sheets, tab bar, camera lens).
    - **When nothing matches** (e.g. a fade or filler the original never needed), pick the closest team token, bind it, and list it in the report as "cần team xác nhận". A raw hex or hand-typed font is allowed only for presentation layers outside the screens (section fill, row/screen labels, the `_Guide · Fold` layer).
-5. **Apple's sources are the truth, not this skill.** The knowledge base below was condensed from them (last read 2026-10-27). Re-read the relevant source whenever the person questions a rule or a case isn't covered, quote it when you explain a decision, and if a source and this skill disagree, follow the source and say so in the report.
+5. **Apple's sources are the truth, not this skill.** The knowledge base below was condensed from them (last read 2026-11-02: HIG unchanged since 2026-09-09; Group Lab summary added). Re-read the relevant source whenever the person questions a rule or a case isn't covered, quote it when you explain a decision, and if a source and this skill disagree, follow the source and say so in the report.
 
 ### Sources (fetch these URLs exactly)
 | Tag | Source | URL |
@@ -33,6 +33,7 @@ Reply in the language the person writes in (the team mostly writes Vietnamese). 
 | T463 | Tech Talk: Strike a pose with adaptive layouts on iPhone Duo (fold, reserved regions, arrangements) | https://developer.apple.com/videos/play/tech-talks/111463/ |
 | T464 | Tech Talk: Leverage multiple displays and scenes on iPhone Duo (hinge API, multitasking, scene accessories) | https://developer.apple.com/videos/play/tech-talks/111464/ |
 | T466 | Tech Talk: Design for iPhone Duo (design principles) | https://developer.apple.com/videos/play/tech-talks/111466/ |
+| GL | Apple DTS — "A Summary of the iPhone Duo Group Lab" (forum, 2026-09-22/23; Q&A on bars, sheets, inspectors, size classes, fold, SDK compatibility, accessibility) | https://developer.apple.com/forums/thread/847644 |
 | X-RES | Apple Xcode agent skill **app-resizability** (+ `references/safe-area-task.md`, `orientation-task.md`, `idiom-task.md`) — what developers change to make an app resize for iPhone Duo | team folder `Dropbox/Working/Figma/xcode-skills/app-resizability/` |
 | X-TB | Apple Xcode agent skill **swiftui-whats-new-27** › `references/toolbar.md` — iOS 27 toolbar overflow, pinning, minimize, status-bar visibility | team folder `Dropbox/Working/Figma/xcode-skills/swiftui-whats-new-27/` |
 | W278 | WWDC26 session 278 "Modernize your UIKit app" (resizable iPhone apps on iPad and in iPhone Mirroring, sidebar for iPhone apps, bar minimization, menus, Device Hub resize mode) | https://developer.apple.com/videos/play/wwdc2026/278/ |
@@ -90,8 +91,17 @@ Not yet read: "Build a great camera experience for iPhone Duo" (only needed for 
 - Keyboard accessory bars stay attached to the keyboard. [T462]
 - **Opting out** of the vertical bar (rare; "in general, don't override the default bar placement"): single-page bottom-heavy layouts like Calculator, or control-heavy sheets with a single item (e.g. only Close). [HIG, T462]
 
+- **Tab bar items vertical = icon only.** A title-only tab can't be shown vertically → every tab needs **icon + title** (title stays for overflow). [GL]
+- **Custom (hand-made) tab bars, toolbars or dense control bars don't move to the side** — only system containers (`UITabBarController`/`TabView`, toolbar items in a navigation controller) do. In review, flag every custom bar as **Cần chỉnh**: design it with Apple's tab bar/toolbar so developers can use system components; otherwise note that developers must reposition it manually (`ReservedRegion` + `verticalBarEdge`). [GL]
+- **When space runs out, keep one bar** — decide per screen and write it in the handoff: **navigation-focused** screens keep the **tab bar** and move toolbar items into overflow (system default); **task-oriented** screens (compose, edit, checkout, capture) **minimize the tab bar** to keep the toolbar actions (`ToolbarVerticalCompressionBehavior` / `UIVerticalBarCompressionBehavior`). [HIG]
+- **Sidebar on the inner display:** a tab-based app can opt into a sidebar when open (default stays a bottom/vertical tab bar); offer it only when the app has many destinations (see "Tab bar → sidebar"). [GL]
+- RTL: vertical bars keep their side relative to the hardware (they don't flip); layout flow inside mirrors. [GL]
+
 ### Sheets and presentations
 - Outer display: a sheet's toolbar is shown vertically; a sheet with a single toolbar button may disable its vertical bar — it then stops just short of the front camera and the status bar repositions. Inner display (landscape and portrait): sheets are **centred with horizontal bars**; sheets placed on the left get no vertical bar, on the right they get one. When folded, sheets slide off the fold. Popovers, context menus and alerts adapt to each pose. [T461, T462, T466]
+
+- Defaults (GL): outer display → sheets present vertically; inner display → **centred**; placement can be requested **centred, leading or trailing** (`presentationPlacement` / `preferredPlacement`) — pick one per sheet and note it. Partial-detent sheets follow the same rules. A sheet's toolbar can opt out of the vertical bar. Custom bottom sheets and controls must avoid the fold explicitly (safe areas alone aren't enough).
+- **Inspectors** (trailing panel): a trailing column on the fully open inner display, a sheet on the outer display / compact width; a sidebar and an inspector can coexist when fully open. [GL]
 
 ### What developers will do (Apple Xcode skills) — design implications
 - **The vertical bar is a lasting horizontal safe-area inset**, not a landscape condition: one side edge carries the whole inset, the other carries zero, and which edge changes with orientation and display. It can appear or disappear **without any change in screen size**. → Designs must not mirror the bar's inset onto the opposite edge, and specs say "inside the safe area", never "104 pt from the right". [X-RES safe-area]
@@ -100,6 +110,14 @@ Not yet read: "Build a great camera experience for iPhone Duo" (only needed for 
 - **Full-bleed background and its content are separate layers**: background may run under the bar; text, controls and lists pin to the safe area. A design that puts content in the same layer as a full-bleed image can't be built cleanly. [X-RES safe-area]
 - **Every screen must resize.** From iOS/iPadOS 27 (iOS 27 SDK), `UIRequiresFullScreen` **no longer opts an app out of resizing**: the system resizes the scene *discretely* (it waits until the person finishes dragging, then jumps to the new size) and still honours the declared orientations. So no screen can be designed as "full-screen only". (The X-RES skill says the key is "ignored"; TN3192 and W278 are the newer, exact wording — follow them.) The app also needs a **launch screen** (missing one → App Store upload rejected, ITMS-90870). [TN3192, W278, TN3208, X-RES]
 - **Toolbar controls in iOS 27 SwiftUI** (developers can set these per item, so the design should say which): `visibilityPriority` high / low (what overflows first), `ToolbarOverflowMenu` (always in the ellipsis menu), `.topBarPinnedTrailing` (never overflows), `toolbarMinimizeBehavior` (bar minimizes on scroll down/up/never), `toolbarVisibility(.hidden, for: .statusBar)` (hide status bar, e.g. splash). [X-TB]
+
+### Compatibility, accessibility, outer-display extras (Group Lab) [GL]
+- **SDK matters for the handoff:** apps built with the **iOS 26 SDK or older** run on Duo in a smaller, letterboxed iPhone-shaped area (closed: left of the status bar/camera; open: familiar iPhone aspect ratio). iOS 27 SDK extends under the status bar; **iOS 27.1 SDK (Xcode 27.1+) is needed for full edge-to-edge**. Put one line in the report: designs assume an iOS 27.1 SDK build.
+- **Larger Text:** a fixed one-screen layout that caps text at a maximum size instead of reflowing can fail App Store Connect's **Larger Text** criteria → layouts must reflow/scroll at large Dynamic Type sizes (run the text-scale check).
+- **VoiceOver across the fold:** standard containers order focus correctly; for custom layouts spanning the hinge, note the intended reading order.
+- **Scene accessories on the outer display** (e.g. a camera preview while capturing): the system decides whether and where they appear; the app can only enable/disable its content — design them as optional extras, with clean start/pause/stop animation. **Picture in Picture** moves to the outer display only when closing, under system control.
+- **Not on Duo:** Stage Manager and free-form window resizing — sizes come only from poses and Split View. The inner display ignores orientation locks (always regular × regular); don't design orientation-specific inner layouts.
+- **Information hierarchy:** keep it the same on both displays; add one more level on the inner display when it fits (Mail: list *or* message closed, both open). Primary (list) leading, secondary (detail) trailing.
 
 ### Other resizable environments: iPad and iPhone Mirroring (optional scope — ask first)
 - From iOS 27 an **iPhone app is fully resizable** when it runs **on iPad** and in **iPhone Mirroring on Mac**; it must adapt to any scene size at runtime. On iPad it stays in the **phone idiom**, so layout must follow size class and available space, not device type, and should use the extra space meaningfully. [W278]
@@ -145,6 +163,8 @@ Not yet read: "Build a great camera experience for iPhone Duo" (only needed for 
 - **Structure:** `layoutMode: NONE` (absolute positioning) or GROUPs mean manual re-layout for every size — recommend auto layout (Apple: avoid fixed widths).
 - **Decorative layers** anchored to the old 874-pt height (gradients, glows, edge effects) need re-anchoring. Remember the vertical bar itself has no scroll-edge effect.
 - **Grids:** odd column counts on the inner display → recommend even.
+- **Custom bars and tabs (GL):** hand-made tab bars/toolbars won't go vertical → flag; tab items without an icon → flag; per screen state **navigation-focused (keep tab bar)** or **task-oriented (minimize tab bar, keep toolbar)**; each sheet's placement (centred / leading / trailing) on the inner display.
+- **Larger Text (GL):** a one-screen layout that can't reflow or scroll at large Dynamic Type sizes → flag (App Store Larger Text criteria).
 - **Dev-readiness (Apple Xcode skills):** flag a layout that only works with equal side margins or that mirrors the bar's inset on the other side [X-RES]; content baked into a full-bleed image layer [X-RES]; spacing that relies on fixed bar heights (20/44/49/34…) [X-RES]; an inner layout that breaks when shown at half width (Split View → compact = outer layout) [X-RES]; a screen designed as "full-screen only" [X-RES]; no launch screen design in the flow [X-RES]. For every bar item, note its overflow behaviour — pinned, high, normal, low, or always in the overflow menu — and whether the bar minimizes on scroll or the status bar is hidden [X-TB].
 
 ### Report, then continue
