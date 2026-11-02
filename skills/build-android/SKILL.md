@@ -14,7 +14,7 @@ Reply in the person's language (the team mostly writes Vietnamese), plain words 
 ## Read only what the task needs (saves tokens)
 | File | Read when |
 |---|---|
-| `references/layout.md` | Any review or build: grids, margins, panes, navigation, canonical layouts, Expressive, Compact specifics, **layout patterns table** |
+| `references/layout.md` | Any review or build: grids, margins, panes, navigation, canonical layouts (feed, list-detail, supporting pane, 3 panes), Large/Extra-large, RTL, Expressive, Compact specifics, **layout patterns table** |
 | `references/components.md` | Importing kit components (keys), text styles, **icon policy** |
 | `references/pitfalls.md` | Before the first `use_figma` write of a session, and whenever something renders wrong |
 | `references/sources.md` | When a rule is questioned or a case isn't covered — re-read the Google source |
@@ -39,7 +39,7 @@ For a small follow-up ("fix spacing", "đổi icon") read only the file that cov
 **Check (measure, don't guess)** — details in `references/layout.md`:
 - Compact: iOS parts mapped; margins 16; fits at 360 without truncation; FAB/toolbar above the navigation bar; gesture inset clear.
 - Stretch risk at 600/905 (buttons, inputs, single cards, lines > 60 characters) → max width, column span or reflow.
-- Canonical fit (list-detail, feed, supporting pane, single column) and why; keep the phone hierarchy.
+- Canonical fit (list-detail, feed, supporting pane, single column) and why; keep the phone hierarchy. Build Compact, Medium, Expanded by default; Large/Extra-large only if asked (desktop/web). Ask about RTL only if the product ships an RTL language.
 - Navigation: bar → rail at Medium single-pane / Expanded; panes per breakpoint; bottom sheet → menu and full-screen dialog → basic dialog at Medium+; reachability (top 25%); CTAs in their content's pane; hinge clear.
 - Edge-to-edge; accessibility (targets ≥ 48, body ≥ 12sp, contrast 4.5:1 / 3:1); **text scaling** risks (skill **check-accessibility**, `references/text-scaling.md`); images (crop, upscale, subject, scrim); icons are Material Symbols if the system says so; auto layout; Expressive fit (Toolbar, Button group, Split button / FAB, Loading indicator; 1–2 hero moments max).
 

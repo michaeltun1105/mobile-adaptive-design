@@ -49,12 +49,58 @@ Read for Phase 1 checks and Phase 2 layout decisions.
 - Scale type, icons and grid items with the screen (a phone grid of thumbnails becomes cramped on a tablet). Codelab: title → Display large, body → Body large / 24sp, small icons → 40dp. [ADP, LABC]
 - Adapt at component / pane level, not by redrawing whole screens per size, input or posture. [ADP]
 
-### Canonical layouts
-- **List-detail**: compact shows list *or* detail; larger shows both. For messaging, contacts, files, any list that reveals detail. NIA 905 × 724: rail 80, list 399 at x 96, detail 362 at x 519 (24 apart). LAB 1280 × 800: content from x 172, left pane 552, detail 457 (24 apart). [CL, NIA, LAB]
-- **Feed**: equivalent items in a grid (list or grid on compact); rigid or staggered, but consistent spacing. LAB 840 wide: content 700 from x 116; featured card full width, then 2 × 334 with 24 gap. [CL, LAB]
-- **Supporting pane**: on compact, supporting content is a sheet or dialog; on larger screens the supporting sheet opens as a pane. LAB "Today": cards 552 left, wishlist pane 457 right, full-width tip card above. [CL, LAB]
-- Contained pane: surface-container fill, **corner radius 24, padding 16**; spacer between panes **24**. [LAB, NIA]
+### Canonical layouts (M3, read 2026-11-02) [CE, BP, SCF, RTL]
+Start every product view from one of the three examples (all exist in the M3 Design Kit and in Compose / MDC-Android code). All three **mirror in RTL**.
+
+**Feed** — grid of cards/lists for browsing a lot of content (news, photos, social, courses).
+- Compact: stack vertically, each item fills the pane width (a 2-column grid is fine for small tiles).
+- Medium: items of different widths across several columns (e.g. 4 equal columns of cards, or 2 panes: small cards + one large card).
+- Expanded / Large / Extra-large: same, with **more (and wider) columns** as the width grows.
+- Use size and position for relationships (lead item larger); order = position; items **reflow** on rotate, unfold, multi-window.
+
+**List-detail** — parent-child pairs (conversations + thread, files + folder, artist + album, settings + category, inbox + email).
+| Breakpoint | Visible panes |
+|---|---|
+| Compact (0–599) | 1 — list *or* detail |
+| Medium (600–839) | 1 recommended (dense content, deep focus); 2 for quick browsing — then a **navigation bar or modal rail** to keep the width |
+| Expanded (840+) · Large (1200–1599) · Extra-large (1600+) | 2 |
+- Back button only in the single-pane detail; **selected state only in the two-pane list**; use explicit/implicit grouping to show focus.
+- Nothing selected: single pane shows the list; two panes show **placeholder / empty state** in the detail pane. Multi-select: keep the most recently used pane when going to one pane.
+- Item selected: 1 → 2 panes shows both with that item's detail; 2 → 1 pane usually shows the **detail with an app bar** (or the list with the item selected for multi-select). Be consistent: if the list was shown before, return to the list.
+- Keep state between detail views (read/unread, scroll position) across fold/unfold/rotate.
+- Pane types: split-pane (spacer centred; best on foldables) or fixed-and-flexible (list fixed 360 at Expanded, 412 at Large/Extra-large).
+
+**Supporting pane** — primary ≈ ⅔ + secondary content that only makes sense next to the primary (productivity, document editing + comments, media + "up next"). Parent-child content → list-detail instead.
+| Breakpoint | Supporting pane placement | Width |
+|---|---|---|
+| Compact | Below the focus pane, or a **bottom sheet** | Flexible |
+| Medium | **Below** the focus pane (e.g. a horizontal row of cards) | Flexible |
+| Expanded | Leading or trailing side | **Fixed 360** |
+| Large / Extra-large | Leading or trailing side (M3 gives no separate rule; follow fixed-and-flexible) | Fixed **412** |
+- Uses **temporary resizing**: after closing/reopening, the pane returns to its default width.
+
+**Three panes** (Extra-large only, uncommon): two panes + a **standard side sheet** as the third (side sheet max **400** wide; fixed panes 412). The navigation rail can stay expanded, collapse or hide. **Never more than three panes.**
+
+**Custom layouts:** build on a canonical example or layer scaffold parts; **levitate** a floating pane for focused tasks (basket, comments, new calendar event).
+
+**Measured references** (older Figma files): NIA 905 × 724 list-detail: rail 80, list 399 at x 96, detail 362 at x 519 (24 apart). LAB 1280 × 800: content from x 172, left pane 552, detail 457. LAB feed at 840: content 700 from x 116, featured card full width, then 2 × 334, gap 24. LAB "Today" supporting pane: cards 552 + wishlist 457, full-width tip above. [NIA, LAB]
+- Contained pane: surface-container fill, **corner radius 24, padding 16**; spacer between panes **24**. Implicit grouping (panes same colour as background) is the M3 default; explicit (fill/outline) when content needs separating. [LAB, NIA, LO]
 - WebViews: prefer opening the browser. [CL]
+
+### Large & Extra-large (1200–1599 / ≥ 1600) [BP, SCF]
+- Mainly laptops, desktops, external monitors, Android desktop mode (tablet + keyboard/mouse, phone on a monitor). **Not every product needs them** — build only when the person asks or the product runs on desktop/web.
+- Navigation: navigation rail, **collapsed or expanded** by content amount; the **expanded rail suits Extra-large**; collapse it when space is needed or on deeper pages. Sorting/filtering/secondary navigation = tabs or components **inside the pane**.
+- Panes: **2 usually best**; 1 for dense visual content (video). Fixed-and-flexible: fixed pane **412**. Split-pane: spacer visually centred **even with an expanded rail**. Extra-large may add a third pane (side sheet, see above).
+- Margins **24**, spacer **24**, grid **12 columns**. Watch line length (40–60 characters) — use max widths or more columns rather than very long lines.
+- Must adapt down when going split-screen, multi-window or resizing a free-form window.
+
+### Adaptive design & components [LO]
+- Adaptive ≠ responsive: responsive scales one layout; adaptive customises structure, components and whole layouts for **people** (settings), **devices** (watch → XR) and **usage** (resizing, rotation, switching device).
+- Design for all inputs (touch, pointer, keyboard). Mobile window modes: full-screen, split-screen, bubbles. Desktop: free-form, split, floating windows.
+- Components adapt by **resizing** (button fills the container or hugs its label and stays leading/trailing), **showing/hiding** (list items reveal descriptions when wider) and **presentation changes** (FAB → extended FAB, rail expands automatically on larger windows).
+- Every piece of content lives in a pane; a pane is one destination (message list = one pane, thread = another).
+- Transitions to plan for: Compact → larger when unfolding, rotating to landscape, leaving split-screen, enlarging a window; Medium/Expanded → smaller when folding, rotating, entering split-screen/multi-window, resizing.
+- Ergonomic regions on Medium landscape/unfolded: top 25% hard to reach; middle comfortable; very bottom edge awkward for large hands.
 
 ### Navigation
 - Primary: **navigation bar** (3–5 destinations, same level) or modal **navigation drawer** (more than 5, less ideal — top reach on compact). Secondary: tabs, bottom app bar. [NAV]
@@ -103,16 +149,19 @@ Read for Phase 1 checks and Phase 2 layout decisions.
 - **Component swaps across breakpoints** (only functionally equivalent ones): navigation bar (compact) → **collapsed navigation rail** (medium/expanded) → **expanded navigation rail** (large/extra-large; or standard expanded rail at expanded); modal expanded rail allowed at compact/medium. Full-screen dialog (compact) → **basic dialog** (medium+). Supplemental selection: **bottom sheet** (compact) → **menu** (medium+). Never swap a button for a chip or a menu. [BP]
 - **Adapt by asking 5 questions:** what to **reveal**, how to **divide**, what to **resize**, what to **reposition** (e.g. actions from the bottom to the leading edge), what to **swap**. [BP]
 - **How panes adapt:** show/hide; **levitate** (float above content — default on large screens, scrim optional; docked panes like bottom sheets become floating or co-planar at medium/expanded, prefer co-planar on large); **reflow** (supporting pane moves below in portrait). Displays: co-planar, floating, docked. Focus order follows the visual order; modal floating panes trap focus and return it to the trigger. [SCF]
-- **Canonical examples:** [CE]
-  - Feed: compact stacks cards full width; medium adds columns (e.g. 4 equal); expanded+ more/wider columns; items reflow by position.
-  - List-detail: Compact 1 pane; Medium 1 (2 for quick browsing — then navigation bar or modal rail); Expanded+ 2. Back button only in single-pane; **selected state only in two-pane**; no selection → detail pane shows an **empty state**; unfolding with a selection shows that detail; folding shows the detail view; keep scroll positions.
-  - Supporting pane: primary ≈ two-thirds. Compact/Medium: supporting content **below** the primary (or a bottom sheet on compact); Expanded: **beside** it, **fixed 360dp**. Use only when the secondary content is meaningful relative to the primary; parent-child content → list-detail.
-  - Custom layouts: layer panes with levitate for focused tasks (basket, comments, new event).
+- **Canonical examples:** full rules in "Canonical layouts (M3, read 2026-11-02)" below. [CE]
 - **Grids & rulers:** columns grow with breakpoints (4 compact, 8 on an unfolded foldable). Fill the scaffold from the edges in: bars & rails first, then panes. **Rulers** = global alignment lines: margin, bar/safety, **title** (aligns the app bar title), **content** (first = hero/headline/primary component; secondary = supplementary text/actions). Margin rulers can narrow or widen for expressive moments (e.g. full-bleed photo grid with wide-margin search). [GS]
 - **Spacing system:** 8dp scale, **space100 = 8dp** (range 0×–9×; nested 0.25×/0.5×/0.75×/1.25× = 2/4/6/10dp). Spacing = **padding** (inside), **gap** (between), **margin** (outside; rarely inside components). Use leading/trailing (RTL-safe). Keep the same spacing when text scales to 200%. Tokens exist in Jetpack Compose only; in Figma use 8dp multiples. [SP]
 - **Spacing as expression:** group by proximity, rhythm, similarity (same-size thumbnails/leading elements, aligned), continuity (rows of chips); give key content generous negative space and the brightest surface; keep focal points in consistent places across screens. [GS]
 - **Density:** opt-in only, never automatic across breakpoints; density −1/−2/−3 removes 4dp of vertical padding each; targets stay ≥ 48×48; no extra density in menus, snackbars, dialogs. [GS]
 - **Also new:** expressive **lists** and **menus** (vibrant styles, flexible configurations), expressive **search** and **search app bar** (contained style with a persistent filled container), watch and XR guidance; Material Android is **Compose-first** (stable Compose Material 3 with the 14 expressive components). [IO26]
+
+### Bidirectionality & RTL [RTL]
+- Arabic, Hebrew, Farsi, Urdu (2B+ people). Use **leading/trailing**, never left/right, in names, constraints and auto-layout; RTL = mirror: reading starts top-right, navigation rail and expanded rail on the **right**, app bar mirrored, toolbar tool order mirrored, badges move to the top-left of the icon, text-field leading/trailing icons swap, chip trailing icon on the left, swipe actions and predictive back mirrored.
+- Text right-aligned and flowing RTL; check text entry, cursor, punctuation, phone numbers, emails/URLs (they stay LTR inside RTL text).
+- **Mirror** directional icons (back, forward, send, arrows) and linear progress (except Hebrew).
+- **Don't mirror:** media controls and media progress (always LTR), clocks and time direction, circular progress, clock/refresh icons pointing clockwise, charts/graphs for Persian and Urdu; in **Hebrew** timelines, media controls and linear progress stay LTR. 12-hour clocks put AM/PM on the left; many RTL locales use 24-hour time.
+- In Figma: build an RTL check copy only when the product ships an RTL language (ask); `scripts/helpers.js` → `mirrorCheck` catches accidental mirroring in LTR builds.
 
 ### Compact (Android phone) specifics [BP, SCF, NAV, TR, E2E]
 - Frame **412 × 915** (Pixel-class phone; test layouts at 360 wide). One pane, margins **16**, content in a single column.
@@ -125,14 +174,15 @@ Read for Phase 1 checks and Phase 2 layout decisions.
 
 
 ### Layout patterns
-| Screen type | Compact 412 × 915 | Medium 600 × 800 | Expanded 905 × 680 |
-|---|---|---|---|
-| List + detail (e.g. trips → trip details) | List screen with navigation bar; tapping opens the detail screen (up arrow, no navigation bar) | One pane: the list; detail opens as its own screen (back button). Two panes only for quick browsing — then 50/50 with a navigation bar | **List-detail, split-pane**: rail + list = 50%, spacer centred on the hinge, detail 50%; selected state on the list item; empty state in the detail pane when nothing is selected |
-| Detail (hero, title, description, CTAs, secondary section) | One column, margins 16; primary CTA as FAB / extended FAB or a floating toolbar above the gesture bar | One column on the grid (6–8 cols), CTAs under the description; supporting content **below** | **Supporting pane**: primary ≈ ⅔ (hero, title, description, CTAs — phone order) + supporting pane **fixed 360** beside it |
-| Feed / cards | 1 column of full-width cards (2 for small tiles) | 2–4 columns, optional full-width featured card | More/wider columns; featured card spans the row |
-| Form / settings / one-task step | Full-screen dialog (close, title, Save) or a child screen; inputs full width | One column, max ~6 cols, CTA with the form (settings may use 2 panes 50/50) | Context left, form right with its CTA; or one centred column |
-| Onboarding / paywall / hero | Art top, text + full-width CTA at the bottom | Art top, text + CTA below, CTA max width | Art left half, text + CTA right half, centred vertically; nothing interactive on the hinge |
-| Filters / options sheet | Modal bottom sheet (drag handle; Save/Cancel at the bottom) | Menu for short option lists; side sheet or full-screen with 2 columns for long filters | Side sheet (fixed 360) or filters inside the pane |
-| Dialog / alert | Basic dialog (280–312 wide) + Scrim | Basic dialog centred + Scrim (full-screen dialog only on compact) | Basic dialog centred + Scrim |
-| Supplemental selection (pickers, small choices) | Bottom sheet (or menu for 2–5 short items anchored to the trigger) | **Menu** (bottom sheet only on compact) | Menu |
-| Media / video | Full width 16:9; immersive in landscape | Letterbox in a container; don't add scrolling that portrait didn't have | Same; tabletop variant only if asked (video top, large controls bottom) |
+Compact, Medium and Expanded are built by default; Large / Extra-large only when the person asks or the product runs on desktop/web.
+| Screen type | Compact 412 × 915 | Medium 600 × 800 | Expanded 905 × 680 | Large 1280 × 720 · Extra-large 1600 × 900 (only if asked) |
+|---|---|---|---|---|
+| List + detail (e.g. trips → trip details) | List screen with navigation bar; tapping opens the detail screen (up arrow, no navigation bar) | One pane: the list; detail opens as its own screen (back button). Two panes only for quick browsing — then 50/50 with a navigation bar | **List-detail, split-pane**: rail + list = 50%, spacer centred on the hinge, detail 50%; selected state on the list item; empty state in the detail pane when nothing is selected | List-detail: fixed list **412** + flexible detail (or split-pane, spacer centred even with expanded rail); expanded rail at Extra-large |
+| Detail (hero, title, description, CTAs, secondary section) | One column, margins 16; primary CTA as FAB / extended FAB or a floating toolbar above the gesture bar | One column on the grid (6–8 cols), CTAs under the description; supporting content **below** | **Supporting pane**: primary ≈ ⅔ (hero, title, description, CTAs — phone order) + supporting pane **fixed 360** beside it | Supporting pane fixed 412; Extra-large may add a side sheet (≤ 400) as a 3rd pane |
+| Feed / cards | 1 column of full-width cards (2 for small tiles) | 2–4 columns, optional full-width featured card | More/wider columns; featured card spans the row | 12-col grid, more columns; cap line length; expanded rail at Extra-large |
+| Form / settings / one-task step | Full-screen dialog (close, title, Save) or a child screen; inputs full width | One column, max ~6 cols, CTA with the form (settings may use 2 panes 50/50) | Context left, form right with its CTA; or one centred column | Settings list-detail (fixed 412 list); forms in a max-width column, never stretched |
+| Onboarding / paywall / hero | Art top, text + full-width CTA at the bottom | Art top, text + CTA below, CTA max width | Art left half, text + CTA right half, centred vertically; nothing interactive on the hinge | Same as Expanded with max widths; art may take more than half |
+| Filters / options sheet | Modal bottom sheet (drag handle; Save/Cancel at the bottom) | Menu for short option lists; side sheet or full-screen with 2 columns for long filters | Side sheet (fixed 360) or filters inside the pane | Standard side sheet (≤ 400) or filters in the pane |
+| Dialog / alert | Basic dialog (280–312 wide) + Scrim | Basic dialog centred + Scrim (full-screen dialog only on compact) | Basic dialog centred + Scrim | Basic dialog centred + Scrim |
+| Supplemental selection (pickers, small choices) | Bottom sheet (or menu for 2–5 short items anchored to the trigger) | **Menu** (bottom sheet only on compact) | Menu | Menu |
+| Media / video | Full width 16:9; immersive in landscape | Letterbox in a container; don't add scrolling that portrait didn't have | Same; tabletop variant only if asked (video top, large controls bottom) | Single pane for video; optional supporting pane (up next) |

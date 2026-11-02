@@ -34,7 +34,9 @@ Other sources:
 | SCF | M3 — Scaffold (bars, rails, panes) | https://m3.material.io/foundations/layout/scaffold/overview |
 | GS | M3 — Grids & spacing (grids, rulers, spacing, density) | https://m3.material.io/foundations/layout/grids-spacing/overview |
 | SP | M3 — Spacing system & tokens | https://m3.material.io/styles/spacing/overview |
-| CE | M3 — Canonical examples (feed, list-detail, supporting pane) | https://m3.material.io/foundations/layout/canonical-examples/overview |
+| CE | M3 — Canonical examples (overview, feed, list-detail, supporting pane) | https://m3.material.io/foundations/layout/canonical-examples/overview |
+| LO | M3 — Layout overview (overview & terms, parts of layout, adaptive design) | https://m3.material.io/foundations/layout/layout-overview/overview |
+| RTL | M3 — Bidirectionality & RTL | https://m3.material.io/foundations/layout/bidirectionality-rtl |
 | MS | Material Symbols (Google Fonts) — the only icon source; SVGs via npm `@material-symbols/svg-600` | https://fonts.google.com/icons |
 | MTB | Material Theme Builder (web app is Flutter/canvas — WebFetch returns only metadata; read the GitHub README instead). Figma plugin "Material Theme Builder" creates M3 tokens and Swaps kit components; Color Match keeps input colours for Container roles; JSON import/export | https://material-foundation.github.io/material-theme-builder/ · https://github.com/material-foundation/material-theme-builder |
 | MCU | `@material/material-color-utilities` (npm, the algorithm inside MTB) — `SchemeTonalSpot` (MTB default), `SchemeFidelity` (≈ Color Match), `MaterialDynamicColors.<role>.getArgb(scheme)`, contrast level 0 / 0.5 / 1, `Hct`, `Contrast.ratioOfTones` | https://www.npmjs.com/package/@material/material-color-utilities |
@@ -43,4 +45,5 @@ Other sources:
 
 **Precedence:** the M3 layout pages updated in May 2026 (IO26, BP, SCF, GS, SP, CE) are the newest source. Where they disagree with older Android guides, the kit's `Examples/Layout grid`, LAB or NIA (e.g. Medium margin 32, rail 80, fixed widths), follow the M3 pages.
 
-Read 2026-10-29/31: MTB (GitHub README), MCU, CCA codelab. Not yet read: M3 Styles pages (Color roles, Themes), Glossary; M3 Breakpoints sub-pages per class were read via the overview JSON (2026-10-27); expressive Lists, Menus, Search pages not yet read.
+Read 2026-11-02: **every tab of M3 Foundations → Layout** (Layout overview 3 tabs, Scaffold 4, Grids & spacing 4, Breakpoints 5, Bidirectionality & RTL, Canonical examples 4 — 23 pages) via the `_dsm` JSON. Column counts per breakpoint are only in images (4 / 8 / 12, matching the kit).
+Read 2026-10-29/31: MTB (GitHub README), MCU, CCA codelab. Not yet read: M3 Styles pages (Color roles, Themes), Glossary; expressive Lists, Menus, Search pages not yet read.
