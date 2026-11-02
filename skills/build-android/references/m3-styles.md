@@ -56,7 +56,7 @@ Read when setting up a system, mapping colours/text to components, choosing shap
 - Styles **Outlined** (dense UIs; default), **Rounded** (heavy type, curved logos), **Sharp** (crisp at small sizes). Axes: **weight 100–700 (400 = regular, 2dp stroke — the M3 default)**, **fill 0–1** (filled = selected/active state), **grade** (−25 for light icons on dark backgrounds, 0 for dark on light, positive for emphasis), **optical size 20–48**.
 - Sizes: **24dp standard**; 20 (dense/desktop), 40 and 48 (with display/headline type, large screens). Corners 2dp; outlined interior corners square.
 - Target **48dp for a 24dp icon** (40 for a 20dp icon only with mouse/keyboard). Abstract icons and navigation need **labels**; complex or key-action icons smaller than 20dp need a text label. Test meaning across cultures (colour and symbols differ).
-- Our default weight comes from the saved system (the setup question); if the person has no preference, M3's default is **400**.
+- Plugin default = **400** (M3); a heavier weight (500/600) only if the person chose it during setup — it's saved in the system.
 
 ## Motion
 - **Physics system (springs)** replaces easing + duration for components. Schemes: **Expressive** (default, slight bounce — hero moments, key interactions) and **Standard** (functional, minimal bounce — utilitarian products); a product picks one, may swap per element.

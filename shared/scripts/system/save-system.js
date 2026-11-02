@@ -6,7 +6,7 @@ const PARAMS={
     colorCollection:'<collection name>', typeCollection:'<Product> · Type scale',
     textStylePrefix:{android:'<Product>/M3', ios:'<Product>/iOS'},
     fonts:{title:'<family>', body:'<family>'},                   // per platform if different: {android:{…}, ios:{…}}
-    icons:{android:{source:'material-symbols', weight:600}, ios:{source:'sf-symbols'}},
+    icons:{android:{source:'material-symbols', weight:400}, ios:{source:'sf-symbols'}},
     overrides:[], iconFrameId:null, notes:'' },
   PAGE_ID:'<page id for the visible frame>', FRAME_X:0, FRAME_Y:0 };
 const sys={...PARAMS.SYSTEM, savedAt:new Date().toISOString()};

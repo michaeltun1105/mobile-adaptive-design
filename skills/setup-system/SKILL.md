@@ -15,7 +15,7 @@ Also inspect what the file already has (the script lists it): a team colour coll
 ## 2. Ask (one AskUserQuestion call, recommended option first; the person can type their own answer)
 1. **Platform:** iOS · Android · Cả hai.
 2. **Theme:** "Đã có theme chưa?" — *Đã có* → which collection/link (reuse it, map roles, don't rebuild) · *Chưa có* → **brand colour** (hex) and **fonts for titles and body**. With both platforms, ask whether fonts are shared or per platform (e.g. SF Pro on iOS, Roboto on Android, or the brand font on both).
-3. **Icons**, per chosen platform: Android — *Đổi sang Material Symbols (Recommended)* (weight 600, Outlined, filled for selected) · *Giữ icon hiện tại*. iOS — *Giữ SF Symbols (Recommended)* · *Bộ icon riêng của team*.
+3. **Icons**, per chosen platform: Android — *Đổi sang Material Symbols (Recommended)* (Outlined, filled for selected) · *Giữ icon hiện tại*. If Material Symbols: weight — *400 · mặc định M3 (Recommended)* · *500* · *600 (đậm hơn, hợp font nặng)*; only ask when the person cares about icon look, otherwise use 400 and mention it can be changed. iOS — *Giữ SF Symbols (Recommended)* · *Bộ icon riêng của team*.
 
 **Language height** (no question): read the file's text — Vietnamese diacritics, Thai, CJK, Arabic, Hindi → `LANGUAGE_HEIGHT:'medium'` (M3: line height ≈ +7%); Burmese/Telugu → `large`; plain Latin (English…) → `small`. Mixed or unclear → ask in one line. Save it with the system.
 
