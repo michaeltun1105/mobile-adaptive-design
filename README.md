@@ -38,7 +38,7 @@ Có thể gõ lệnh (ví dụ `/mobile-design:check-accessibility <link>`) ho�
 
 1. Script dùng chung chỉ sửa trong `shared/scripts/` (không sửa bản chép trong `skills/*/scripts/`).
 2. Chạy `tools/sync-shared.sh` để chép sang các skill.
-3. Tăng `version` trong `.claude-plugin/plugin.json` (ví dụ 0.1.0 → 0.1.1).
+3. Tăng `version` trong `.claude-plugin/plugin.json` (ví dụ 1.0.0 → 1.0.1 khi sửa nhỏ, 1.1.0 khi thêm tính năng).
 4. Mở pull request → merge.
 
 Cấu trúc: mỗi skill có `SKILL.md` (quy trình ngắn), `references/` (đọc khi cần), `scripts/` (đoạn code Figma dùng lại, chỉ điền PARAMS). Không có giá trị riêng của sản phẩm nào trong plugin — màu, font, icon luôn lấy từ system đã lưu trong từng file.
