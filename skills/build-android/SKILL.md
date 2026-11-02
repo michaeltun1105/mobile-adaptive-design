@@ -16,6 +16,7 @@ Reply in the person's language (the team mostly writes Vietnamese), plain words 
 |---|---|
 | `references/layout.md` | Any review or build: grids, margins, panes, navigation, canonical layouts (feed, list-detail, supporting pane, 3 panes), Large/Extra-large, RTL, Expressive, Compact specifics, **layout patterns table** |
 | `references/components.md` | Importing kit components (keys), text styles, **icon policy** |
+| `references/m3-styles.md` | Colour-role choice for custom parts, emphasized type, shape scale, elevation levels, icon sizes/targets, motion/transition notes for handoff |
 | `references/pitfalls.md` | Before the first `use_figma` write of a session, and whenever something renders wrong |
 | `references/sources.md` | When a rule is questioned or a case isn't covered — re-read the Google source |
 | `scripts/…` | Reuse instead of rewriting (see *Scripts*) |

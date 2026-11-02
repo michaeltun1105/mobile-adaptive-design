@@ -14,4 +14,5 @@ Read for the review check, type-scale variables and the 200% verify.
   - Navigation bar / rail labels stay short (one word); if they can't fit at 200% they may truncate but the icon must stay understandable — never rely on the label alone.
   - Top app bar titles: Small app bar keeps one line → long titles use Medium/Large flexible app bars, which wrap.
   - Never put text in images; text over images needs room to grow without leaving its scrim.
+- **Language height** [ST]: M3 raises line height for taller scripts — **Vietnamese is "medium" (≈ +7%)** like Thai, CJK, Arabic, Hindi; Burmese/Telugu ≈ +30%. Build the type scale with the product's language height, and never fix the height of text containers (fixed-height components are made for Latin and overlap otherwise).
 - **Handoff:** sp for `fontSize` and `lineHeight` (Compose `TextUnit.sp`; XML `textSize`/`lineHeight` in sp); `Modifier.heightIn(min = …)` instead of fixed `height`; no maths on `fontScale`/`scaledDensity` — convert with `TypedValue.applyDimension()`; test every screen at 200% and with the largest Display size.
