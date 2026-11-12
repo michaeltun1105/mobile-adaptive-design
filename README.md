@@ -12,6 +12,7 @@ Bộ công cụ cho Claude làm việc với thiết kế mobile trong Figma: d�
 | `build-android` | Làm bản Android Compact / Medium / Expanded | "làm bản tablet cho màn này <link>" |
 | `build-iphone-duo` | Làm bản iPhone Duo (màn ngoài / màn trong) | "làm bản Duo cho màn này <link>" |
 | `convert-ios-to-android` | Chỉ chuyển màn iPhone sang Android điện thoại | "chuyển màn iOS này sang Android <link>" |
+| `build-android-car` | Đưa app lên màn hình xe (Android Auto / Android Automotive): xét nhóm app được phép, lên luồng ≤ 5 bước, dựng màn từ bộ Car App Templates | "làm bản Android Auto cho app này <link>" |
 | `check-accessibility` | Kiểm tra tương phản, chữ phóng to, vùng chạm, màu/chữ chưa gắn biến | "kiểm tra accessibility <link>" |
 
 Có thể gõ lệnh (ví dụ `/mobile-design:check-accessibility <link>`) hoặc nhắn bình thường — Claude tự chọn skill.

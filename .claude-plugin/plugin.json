@@ -1,6 +1,6 @@
 {
   "name": "mobile-design",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Figma workflows for mobile design: set up a product's design system (platform, brand theme, type scale, icons), adapt screens for Android phone/foldable/tablet and iPhone Duo, translate iPhone screens to Android, and check accessibility (contrast, text scaling, touch targets, hard-coded values). Requires the Figma connector.",
   "author": {
     "name": "Design team"

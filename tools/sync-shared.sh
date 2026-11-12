@@ -8,5 +8,6 @@ copy setup-system     system/load-system.js system/save-system.js theme/theme-ge
 copy build-android system/load-system.js figma/helpers.js figma/android-helpers.js theme/apply-theme.js theme/apply-scales.js icons/svg-to-24.py a11y/contrast-audit.js a11y/text-scale-check.js motion/apply-prototype.js
 copy build-iphone-duo       system/load-system.js figma/helpers.js figma/ios-helpers.js a11y/contrast-audit.js a11y/text-scale-check.js
 copy convert-ios-to-android  system/load-system.js figma/helpers.js figma/android-helpers.js icons/svg-to-24.py motion/apply-prototype.js
+copy build-android-car      system/load-system.js figma/helpers.js a11y/contrast-audit.js theme/theme-generate.mjs car/car-helpers.js car/car-check.js car/flow-steps.mjs
 copy check-accessibility     system/load-system.js a11y/contrast-audit.js a11y/text-scale-check.js a11y/touch-target-check.js a11y/hardcode-check.js
 echo "synced"
