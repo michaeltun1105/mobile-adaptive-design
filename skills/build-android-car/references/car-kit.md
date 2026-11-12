@@ -1,6 +1,10 @@
 # Car App Templates Design Kit (Figma) — checked 2026-11-12
 
-Team copy: `https://www.figma.com/design/I7uLEhgf2EOxTsRmEtg3oz/Car-App-Templates-Design-Kit--Community-` (pages: Cover · **Components** · **Car App Templates** · **Android Auto Dashboard**). It's a community file copied into drafts — **not a published library**, so its keys can't be imported into other files. Build inside this file (a page per product), or ask an owner to publish it as a team library and then import by key.
+Team copy: `https://www.figma.com/design/I7uLEhgf2EOxTsRmEtg3oz/Car-App-Templates-Design-Kit--Community-` (pages: Cover · **Components** · **Car App Templates** · **Android Auto Dashboard**). A team may publish its copy as a **team library** (the keys below stay the same — checked 2026-11-12 on a published copy). If the product file has that library added (`get_libraries`), build **in the product file** and import by key; otherwise build inside the kit file (a page per product).
+
+**Library gotchas (published copy):**
+- Hidden layers inside instances of `List/row-trailing` (accessory-right, badge, text button…) are **not exposed** — `children` lists only the visible `icon-button/tonal`, and the boolean props don't switch it. For a switch/radio/check trailing control: wrap the template instance in a plain frame (same size, clip), place a `list/accessory` instance (`type=switch|radio|check`) over the row's trailing area, set the nested `switch.selected` / `radio-button.checked`, and annotate.
+- Avatar/album-art leading slots: hide the `avatars` frame directly; the trip-info frame of NavigationTemplate: hide `Navigation/tripinfo` directly.
 
 ## Screen sizes — variable collection `Apps` (template width/height are bound to it)
 | Mode | App space (w × h) | Use |

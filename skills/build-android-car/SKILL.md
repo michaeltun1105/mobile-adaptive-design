@@ -10,7 +10,7 @@ Car screens are **assembled from Google's templates**, not drawn freely: Google 
 Reply in the person's language (mostly Vietnamese), plain words; one sentence first saying what you'll do. Rules: `references/car-rules.md` (all 81 Android for Cars design pages, read 2026-11-12). Kit facts, sizes and keys: `references/car-kit.md`. Never edit the kit's own components or templates.
 
 ## Setup (every run)
-1. Load `figma-use`. `create_session` for the **product file** (the phone design) and for the **car kit file** (team copy of "Car App Templates Design Kit"; default `I7uLEhgf2EOxTsRmEtg3oz` — ask if the team has another copy or a published library).
+1. Load `figma-use`. `create_session` for the **product file** (the phone design) and for the **car kit file** (team copy of "Car App Templates Design Kit"; default `I7uLEhgf2EOxTsRmEtg3oz` — ask if the team has another copy or a published library). If the kit is a library added to the product file, build there and import by key (see `car-kit.md` → library gotchas).
 2. In the product file run `scripts/load-system.js` → brand accent(s) and icon set. None saved → ask for 1–2 accent colours (or run **setup-system**). Accents need **light and dark variants**: from `theme-generate.mjs` take Light `Primary` and Dark `Primary` (tone ≈ 80; Android Auto is dark by default). Check each against its background (4.5:1).
 3. Freshness: the car guides are dated per page; if the task touches a template or rule, re-fetch that page when the person asks for "latest" or the note is older than ~3 months.
 
