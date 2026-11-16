@@ -7,7 +7,7 @@ description: "This skill should be used when the user wants an app on a car scre
 
 Car screens are **assembled from Google's templates**, not drawn freely: Google and car makers own layout, sizes, fonts and most colours; the app supplies content, icons, images and up to 2 accent colours. Order: **Setup → Phase 1 Category & tasks → Phase 2 Flows (approve) → Phase 3 Build → Verify → Report**.
 
-Reply in the person's language (mostly Vietnamese), plain words; one sentence first saying what you'll do. Rules: `references/car-rules.md` (all 81 Android for Cars design pages, read 2026-11-12). Kit facts, sizes and keys: `references/car-kit.md`. Never edit the kit's own components or templates.
+Reply in the person's language (mostly Vietnamese), plain words; one sentence first saying what you'll do. Rules: `references/car-rules.md` (all 81 Android for Cars design pages, read 2026-11-12). Kit facts, sizes and keys: `references/car-kit.md`. Never edit the kit's own components or templates. For Apple CarPlay use `build-carplay`; when both are wanted, compare categories first — the same feature can fit different categories on the two platforms.
 
 ## Setup (every run)
 1. Load `figma-use`. `create_session` for the **product file** (the phone design) and for the **car kit file** (team copy of "Car App Templates Design Kit"; default `I7uLEhgf2EOxTsRmEtg3oz` — ask if the team has another copy or a published library). If the kit is a library added to the product file, build there and import by key (see `car-kit.md` → library gotchas).

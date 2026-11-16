@@ -1,0 +1,8 @@
+// Paste the functions you need at the top of a use_figma script. No product-specific values inside.
+async function loadFonts(node){ const ts=node.type==='TEXT'?[node]:node.findAll(n=>n.type==='TEXT'); for(const t of ts) for(const s of t.getStyledTextSegments(['fontName'])) await figma.loadFontAsync(s.fontName); }
+// Grow a cloned auto-layout block to newW; only children as wide as the widest sibling become FILL.
+function widen(root,newW){ const marks=[]; const walk=n=>{ if(!('children' in n)||n.type==='INSTANCE'||n.layoutMode!=='VERTICAL') return; const ws=n.children.filter(c=>c.layoutPositioning!=='ABSOLUTE').map(c=>c.width); const inner=Math.max(0,...ws); for(const c of n.children){ if(c.layoutPositioning==='ABSOLUTE') continue; if(c.width>=inner-1){ marks.push(c); walk(c); } } }; walk(root); if(root.layoutMode&&root.layoutMode!=='NONE') root.counterAxisSizingMode='FIXED'; root.resize(newW,root.height); for(const c of marks){ try{ c.layoutSizingHorizontal='FILL'; }catch(e){} } if(root.layoutMode==='VERTICAL') root.primaryAxisSizingMode='AUTO'; }
+// Copy explicit variable modes from a source node (e.g. the original screen) to a new frame.
+async function copyModes(from,to){ for(const [k,v] of Object.entries(from.explicitVariableModes||{})){ try{ to.setExplicitVariableModeForCollection(await figma.variables.getVariableCollectionByIdAsync(k),v); }catch(e){} } }
+// Nodes rendered mirrored (negative x-scale) — compare with the original before "fixing": some art is flipped on purpose.
+function mirrorCheck(root){ return root.findAll(n=>n.visible&&n.relativeTransform&&n.relativeTransform[0][0]<0).map(n=>n.id+' '+n.name); }

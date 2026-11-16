@@ -1,7 +1,7 @@
 {
   "name": "mobile-design",
-  "version": "1.7.1",
-  "description": "Figma workflows for mobile design: set up a product's design system (platform, brand theme, type scale, icons), adapt screens for Android phone/foldable/tablet and iPhone Duo, translate iPhone screens to Android, and check accessibility (contrast, text scaling, touch targets, hard-coded values). Requires the Figma connector.",
+  "version": "1.8.0",
+  "description": "Figma workflows for mobile design: set up a product's design system (platform, brand theme, type scale, icons), adapt screens for Android phone/foldable/tablet, iPhone Duo, Android Auto and CarPlay, translate iPhone screens to Android, and check accessibility (contrast, text scaling, touch targets, hard-coded values). Requires the Figma connector.",
   "author": {
     "name": "Design team"
   },
@@ -11,6 +11,8 @@
     "material 3",
     "ios",
     "iphone duo",
+    "carplay",
+    "android auto",
     "adaptive layout",
     "design system",
     "accessibility"
